@@ -149,7 +149,7 @@ main()
       fi
 
     elif [ $plugin = "hostname" ]; then
-      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-show-hostname" "light_purple white")
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-show-hostname" "orange white")
       tmux set-option -g status-right-length 250
       script="#($current_dir/hostname.sh)"
 
