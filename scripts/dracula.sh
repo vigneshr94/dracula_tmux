@@ -33,6 +33,7 @@ main()
   show_ssh_session_port=$(get_tmux_option "@dracula-show-ssh-session-port" false)
   IFS=' ' read -r -a plugins <<< $(get_tmux_option "@dracula-plugins" "battery network weather")
   show_empty_plugins=$(get_tmux_option "@dracula-show-empty-plugins" true)
+  show_hostname=$(get_tmux_option "dracula-show-hostname" false)
 
   # Dracula Color Pallette
   white='#f8f8f2'
@@ -146,6 +147,11 @@ main()
         colors[1]="dark_gray"
         script="${script} not found!"
       fi
+
+    elif [ $plugin = "hostname" ]; then
+      IFS=' ' read -r -a colors <<< $(get_tmux_option "@dracula-show-hostname" "light_purple white")
+      tmux set-option -g status-right-length 250
+      script="#($current_dir/hostname.sh)"
 
     elif [ $plugin = "cwd" ]; then
       IFS=' ' read -r -a colors  <<< $(get_tmux_option "@dracula-cwd-colors" "dark_gray white")
